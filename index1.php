@@ -34,7 +34,7 @@ $trees = ['wakiso' => [
     ], 
     'kabale' =>[
         'muvule tree' => 69,
-        'eucalyptus' => 803,
+        'eucalyp/tus' => 803,
         'musizi' => 7363,
         'masabu' => 89
     ], 
@@ -44,10 +44,49 @@ $trees = ['wakiso' => [
         'musizi' => 763,
         'masabu' => 29
     ]];
+    
+    include 'indexfunction.php';
 
-    echo $trees["wakiso"]["musabu"];
+    //Calculate the total number of trees in both districts and store in a cookie
+        $totalTrees = 0;
+
+    foreach($trees as $district => $number){
+        $totalTrees = $totalTrees + $number;
+    }
    
+
+    setcookie("theTrees", $totalTrees, time()+ (2*24*3600));
+
+    //total number of masabu trees
+    $totMasabuTrees = 0;
+
+    foreach($trees as $district => $number){
+        if($district = 'masabu'){
+            $totMasabuTrees = $totMasabuTrees + $number;
+
+        }else{
+            echo " ";
+        }
+    }
+    session_start();
+
+    $_SESSION["$totMasabuTrees"];
+
     
-    
+
+    //total number of trees per district.
+    foreach($trees as $district => $number){
+        if($trees["Wakiso"][$district]){
+            $totalTrees1 = $totalTrees1 + $number;
+
+        } else if($trees["kabale"][$district]){
+
+            $totalTrees2 = $totalTrees2 + $number;        
+        
+        } else{
+            echo " ";
+        }
+    }
+
 
 ?>
